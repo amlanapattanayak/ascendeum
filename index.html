@@ -1,0 +1,65 @@
+<html>
+    <title>Lucky 7 Game- Amlana</title>
+    <body>
+        <form name="frm_game" method="post">
+            <h1>Welcome to Lucky 7 Game</h1>    
+            <h2>Place Your Bet (Rs 10):</h2>
+            <div>
+                <input type="radio" name="bet_opt" value="6"> [Below 7] &nbsp;
+                <input type="radio" name="bet_opt" value="7"> [7] &nbsp;
+                <input type="radio" name="bet_opt" value="8"> [Above 7] &nbsp;
+                <span onclick="playLucky()" style="cursor:pointer; color:blue;">[Play]</span>
+            </div>
+            <br /><br />
+            <div>
+                Game Result <br><br />
+                Dice 1 : <input id="dice1" style="border: 0px;"> <br>
+                Dice 2 : <input id="dice2" style="border: 0px;"> <br>
+                Total : <input id="total" style="border: 0px;"> <br>
+            </div>
+            <div><input id="result" style="border: 0px;"> Balance is now <input id="balance" style="border: 0px;"></div>
+            <br /><br />
+            <div><a href=""> [Reset and Play Again] <a><span onclick="document.frm_game.bet_opt.reset"  style="cursor:pointer; color:blue;"> [Continue Playing] </span></div>
+        </form>
+<script>
+var balance = 100;
+function playLucky(){
+    if(!(document.frm_game.bet_opt.value)){
+        alert("Value not selected");
+    }else{
+        balance -= 10;
+        var dice1 = Math. trunc(Math. random()*6);
+        var dice2 = Math. trunc(Math. random()*6);
+
+        if(dice1==0) dice1=1;
+        if(dice2==0) dice2=1;
+
+        var total = dice1 + dice2;
+        var bet_opt = document.frm_game.bet_opt.value;
+
+        document.frm_game.dice1.value=dice1;
+        document.frm_game.dice2.value=dice2;
+        document.frm_game.total.value=total;
+
+        var result = "You Loose!";
+
+        if(total == 7 &&  bet_opt == 7){
+            balance += 30;
+            result = "Congratulation! You win!";
+        }
+        else if(total < 7 &&  bet_opt < 7){
+            balance += 20;
+            result = "Congratulation! You win!";
+        }
+        else if(total > 7 &&  bet_opt > 7){
+            balance += 20;
+            result = "Congratulation! You win!";
+        }
+        document.frm_game.result.value = result;
+        document.frm_game.balance.value=balance;
+    }
+    //alert(dice1+"+"+dice2+"="+(dice1+dice2));    
+}    
+</script>
+    </body>
+</html>
